@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap');
+
+/* CSS Variables for theming */
+:root {
+  /* Light theme (default) */
+  --color-bg-primary: #f8fafc;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f1f5f9;
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f46e5;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  
+  /* Symbol card specific */
+  --symbol-bg: #ffffff;
+  --symbol-border: #e2e8f0;
+  --symbol-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+  --symbol-hover-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
+  
+  /* Spacing */
+  --header-height: 64px;
+  --grid-gap: 12px;
+  --container-padding: 16px;
+}
+
+/* Dark theme */
+.dark {
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-border: #334155;
+  --color-accent: #818cf8;
+  --color-accent-hover: #6366f1;
+  
+  --symbol-bg: #1e293b;
+  --symbol-border: #334155;
+  --symbol-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.3);
+  --symbol-hover-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+}
+
+/* High contrast theme */
+.high-contrast {
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #1a1a1a;
+  --color-bg-tertiary: #333333;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e5e5e5;
+  --color-text-muted: #a3a3a3;
+  --color-border: #ffffff;
+  --color-accent: #ffff00;
+  --color-accent-hover: #ffd700;
+  
+  --symbol-bg: #1a1a1a;
+  --symbol-border: #ffffff;
+  --symbol-shadow: none;
+  --symbol-hover-shadow: 0 0 0 3px #ffff00;
+}
+
+/* Base styles */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent pull-to-refresh and overscroll */
+html, body {
+  overscroll-behavior: none;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Symbol card styling */
+.symbol-card {
+  background-color: var(--symbol-bg);
+  border: 2px solid var(--symbol-border);
+  box-shadow: var(--symbol-shadow);
+  min-height: 44px;
+  min-width: 44px;
+  transition: all 0.15s ease-out;
+}
+
+.symbol-card:hover {
+  box-shadow: var(--symbol-hover-shadow);
+  transform: translateY(-2px);
+}
+
+.symbol-card:active {
+  transform: scale(0.96);
+  box-shadow: var(--symbol-shadow);
+}
+
+/* Category card (folder) styling */
+.category-card {
+  border-color: transparent;
+}
+
+/* Button base */
+.btn {
+  min-height: 44px;
+  min-width: 44px;
+  transition: colors 0.15s;
+}
+
+.btn-primary {
+  background-color: #6366f1;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #4f46e5;
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-border);
+}
+
+.btn-icon {
+  padding: 0.5rem;
+}
+
+/* Header styling */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: var(--header-height);
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* PWA styles */
+@media (display-mode: standalone) {
+  .app-header {
+    padding-top: env(safe-area-inset-top);
+    height: calc(var(--header-height) + env(safe-area-inset-top));
+  }
+}
+
+/* Animations */
+@keyframes slide-up {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.2s ease-out;
+}
+
+/* Print styles - hide app when printing */
+@media print {
+  body {
+    display: none;
+  }
+}
